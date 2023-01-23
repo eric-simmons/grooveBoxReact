@@ -1,25 +1,64 @@
-import logo from './logo.svg';
+
+import React, { useState } from 'react';
 import './App.css';
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main'>
+      <Grid />
     </div>
   );
 }
 
-export default App;
+let steps 
+class Grid extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      steps: [{}]
+    }
+    this.activateStep = this.activateStep.bind(this)
+  }
+
+
+  createSteps() {
+    for (let i = 0; i < 16; i++) {
+      steps.push({
+        noteOn: false,
+        velocity: 0,
+        playhead: false,
+        firstStep: false,
+        lastStep: false,
+      })
+      this.setState({ steps })
+    }
+  }
+
+  activateStep() {
+    let steps = this.state.steps
+    this.setState({ steps: steps });
+  }
+
+  render() {
+    return (
+      <div className="grid">
+        {this.createSteps()}
+        {this.state.steps.map((button, i) => {
+          console.log(button)
+          return (
+            <button className='stepBtn'
+              key={'step' + i}
+              onClick={this.activateStep}
+            />
+          )
+        })}
+      </div>
+    )
+  }
+}
+
+
+export default App
