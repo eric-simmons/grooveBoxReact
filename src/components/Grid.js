@@ -1,82 +1,37 @@
-import React from "react"
 
-let steps = [...Array(16).keys()]
-steps.map((step, index) => {
-   return steps[index] = ({
-        stepId: Math.random(),
-        noteOn: false,
-        velocity: 0,
-        playhead: false,
-        firstStep: false,
-        lastStep: false,
-        isDown: false
-    })
-})
-// let patternLength = 16
+// import React, { useEffect, useState } from "react"
+
+// function Grid() {
+//     const [gridState, setGridState] = useState({
+//         numSteps: 16,
+//         currentStep: 0,
+//         firstStep: 0,
+//         lastStep: 0
+//     })
 
 
-console.log(steps)
-
-//change to map
-for (let i = 0; i < steps.length; i++) {
-    steps[i] = ({
-        stepId: Math.random(),
-        noteOn: false,
-        velocity: 0,
-        playhead: false,
-        firstStep: false,
-        lastStep: false,
-        isDown: false
-    })
-}
-console.log(steps)
+//     const createButtons = () => {
+//         let buttons = []
+//         for (let i = 0; i < gridState.numSteps; i++) {
+//             buttons.push(
+//                 <button
+//                     className='stepBtn'
+//                     key={i}>
+//                 </button>)
+//         }
+//         return buttons
+//     }
 
 
-class Grid extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            steps: steps
-        }
-        this.toggleStep = this.toggleStep.bind(this)
-    }
 
-    toggleStep(stepId) {
-        console.log(stepId)
-        const updatedSteps = [...this.state.steps].map(step => {
-            return {
-                ...step,
-                noteOn : step.stepId === stepId ? !step.noteOn : step.noteOn
-            }
-        })
-        //in updated steps find step by id
-
-        //modify step object
-
-        console.log(updatedSteps)
-        this.setState({
-            steps: updatedSteps
-        })
-    }
+//     return (
+//         <div className="grid">
+//             {createButtons()}        </div>
+//     )
 
 
-    render() {
-        return (
-            <div className="grid">
-                {this.state.steps.map((step, i) => {
-                    return (
-                        <button className='stepBtn'
-                            key={i}
-                            onClick={() => this.toggleStep(step.stepId)}
-                            style={{ backgroundColor: step.noteOn ? 'red' : 'blue' }}
-                        >
-                            {step.noteOn ? 'Active' : 'Inactive'}
-                        </button>
-                    )
-                })}
-            </div>
-        )
-    }
-}
 
-export default Grid
+// }
+
+// export default Grid
+
