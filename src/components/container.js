@@ -2,7 +2,6 @@
 import Button from "./button"
 
 const Container = ({ view, setView }) => {
-    console.log(view, setView)
     return (
         <div className="modes">
             <Button

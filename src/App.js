@@ -5,11 +5,13 @@ import React, { useState } from 'react';
 import Container from './components/container';
 import SlidersPage from './pages/sliders';
 import StepsPage from './pages/steps';
-
+import PerformPage from './pages/perform';
+import SavePage from './pages/save';
 
 function App() {
 
-  const [view, setView] = useState('sliders')
+  const [view, setView] = useState('steps')
+  
 
   const renderView = () => {
     if (view === 'steps') {
@@ -17,6 +19,12 @@ function App() {
     }
     else if (view === 'sliders') {
       return <SlidersPage />
+    }
+    else if (view === 'perform') {
+      return <PerformPage />
+    }
+    else if (view === 'save') {
+      return <SavePage />
     }
     else return 'no view'
   }
