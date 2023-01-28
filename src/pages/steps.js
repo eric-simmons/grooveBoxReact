@@ -1,31 +1,54 @@
 import { useState, useEffect } from 'react'
-import Container from '../components/container'
+import Modes from '../components/modes'
 import Button from '../components/button'
-import { toBeEnabled } from '@testing-library/jest-dom/dist/matchers'
+import { Oscillator, Sequence, Transport, Draw, time, Start, } from 'tone'
+
 
 
 
 const StepsPage = (...props) => {
-    const [steps, setStepsState] = useState(
-        [...Array(16).fill(0).map(step => {
+    const [steps, setSteps] = useState(
+        [...Array(16).fill(0).map((step, i) => {
             return step = {
-                stepId: Math.random(),
+                stepId: i,
                 activeStep: false,
                 currentStep: false,
-                firstStep: false,
-                lastStep: false,
+                firstStep: 0,
+                lastStep: 15,
                 className: 'btn'
+
             }
         })])
 
-    const begin = () => {
-        console.log('clicked')
-        const visualSequence = new Tone.Sequence((time) => {
-            Tone.Draw.schedule(() => {
-                console.log('hey')
+    Transport.loop = true
+    Transport.loopEnd = ("2:0:0")
+
+    const playHead = () => {
+        const osc = new Oscillator().toDestination();
+        // repeated event every 8th note
+        Transport.scheduleRepeat((time) => {
+
+            Draw.schedule(() => {
+
+                let playHead = Math.floor(((Transport.progress) * 4) * Transport.loopEnd)
+                let updatedSteps = steps.map(step => {
+
+                    return {
+                        ...step,
+                        currentStep: step.stepId === playHead ? !step.currentStep : step.currentStep
+                    }
+                })
+                setSteps(updatedSteps)
+                // do drawing or DOM manipulation her
+                // console.log()
             }, time)
-        }, steps).start(0)
+
+        }, "8n")
+        // transport must be started before it starts invoking events
+        Transport.start();
     }
+    // transport must be started before it starts invoking events
+
 
 
 
@@ -38,24 +61,28 @@ const StepsPage = (...props) => {
                 className: step.stepId === stepId ? 'btn-active' : 'btn'
             }
         })
-        setStepsState(updatedSteps)
+        setSteps(updatedSteps)
     }
 
 
     return (
+        <>
         <div className='grid'>
             {steps.map((step, i) => (
                 <Button
                     key={(steps[i].stepId)}
                     onClick={() => { toggleStep(step.stepId) }}
                     active={false}
-                    style={{ backgroundColor: step.activeStep ? 'red' : 'blue' }}
+                    style={{ backgroundColor: step.currentStep ? 'red' : '' }}
                 />
 
             ))}
-            <button
-                onClick={() => { begin() }}>START</button>
+            
+                
         </div>
+        <Button
+        onClick={() => { playHead() }}>START</Button>
+        </>
     )
 }
 

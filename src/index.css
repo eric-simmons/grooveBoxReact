@@ -16,7 +16,14 @@
   grid-template-columns: repeat(4, 1fr);
   margin: 20px;
   padding: 10px;
+}
 
+.transportControl{
+  display: grid;
+  background-color:rgb(98, 24, 24);
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px;
+  padding: 10px;
 }
 
 .grid{

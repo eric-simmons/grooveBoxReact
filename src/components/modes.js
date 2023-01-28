@@ -1,7 +1,7 @@
 //container holds mode selector buttons
 import Button from "./button"
 
-const Container = ({ view, setView }) => {
+const Modes = ({ view, setView }) => {
     return (
         <div className="modes">
             <Button
@@ -29,4 +29,4 @@ const Container = ({ view, setView }) => {
     )
 }
 
-export default Container
+export default Modes
