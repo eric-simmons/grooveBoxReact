@@ -1,5 +1,9 @@
+import Slider from "../components/slider"
+
 const SlidersPage = (props) => {
-    return 'SlidersPage'
+    return (
+        <Slider />
+    )
 }
 
 export default SlidersPage

@@ -1,5 +1,10 @@
 const Slider = (props) => {
-    return 'Slider'
+    return (
+        <input className="sequencer"
+            value="30"
+            type="range"
+            orient="vertical" />
+    )
 }
 
 export default Slider

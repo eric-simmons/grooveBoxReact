@@ -1,16 +1,19 @@
 
 import Button from "./button"
 
-const TransportControl = () => {
+const TransportControl = ({ playHead, setPlayHead }) => {
     return (
         <div className="transportControl">
-            <Button>
+            <Button
+                onClick={() => setPlayHead('start')}>
                 Start
             </Button>
-            <Button>
+            <Button
+                onClick={() => setPlayHead('pause')}>
                 Pause
             </Button>
-            <Button>
+            <Button
+                onClick={() => setPlayHead('stop')}>
                 Stop
             </Button>
         </div>

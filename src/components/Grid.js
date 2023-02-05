@@ -1,37 +1,29 @@
+import { TOGGLE_STEP } from "../ctx/actions";
+import { useStepsContext } from "../ctx/stepContext";
+import Button from "./button";
 
-// import React, { useEffect, useState } from "react"
+const Grid = () => {
+    const { steps, dispatch } = useStepsContext()
+    console.log(steps)
+    return (
+        <>
+            <div className='grid'>
+                {steps.map((step, i) => (
+                    <Button
+                        key={(steps[i].stepId)}
+                        onClick={() => {
+                            dispatch({
+                                type: TOGGLE_STEP,
+                                payload: step.stepId
+                            })
+                        }}
+                        active={false}
+                        style={{ backgroundColor: step.currentStep ? 'red' : '' }}
+                    />
+                ))}
+            </div>
+        </>
+    )
+}
 
-// function Grid() {
-//     const [gridState, setGridState] = useState({
-//         numSteps: 16,
-//         currentStep: 0,
-//         firstStep: 0,
-//         lastStep: 0
-//     })
-
-
-//     const createButtons = () => {
-//         let buttons = []
-//         for (let i = 0; i < gridState.numSteps; i++) {
-//             buttons.push(
-//                 <button
-//                     className='stepBtn'
-//                     key={i}>
-//                 </button>)
-//         }
-//         return buttons
-//     }
-
-
-
-//     return (
-//         <div className="grid">
-//             {createButtons()}        </div>
-//     )
-
-
-
-// }
-
-// export default Grid
-
+export default Grid

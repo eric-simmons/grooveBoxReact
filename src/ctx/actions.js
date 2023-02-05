@@ -1,0 +1,2 @@
+export const TOGGLE_STEP = 'TOGGLE_STEP'
+export const SEQUENCE_PITCH = 'SEQUENCE_PITCH'
