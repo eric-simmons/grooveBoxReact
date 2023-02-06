@@ -11,8 +11,6 @@ const defaultSteps = [...Array(16).fill(0).map((_, i) => {
             velocity: 0,
             pitch: 30,
         }
-
-
     }
 })]
 
@@ -22,11 +20,7 @@ const defaultState = {
     lastStep: 15
     //song: {}
 }
-
-console.log(defaultSteps)
-
 export const StepsContext = createContext(defaultState)
-
 export const StepsProvider = ({ children }) => {
     const [steps, dispatch] = useReducer(reducer, defaultState)
     return (
@@ -36,6 +30,4 @@ export const StepsProvider = ({ children }) => {
         </StepsContext.Provider>
     )
 }
-
-
 export const useStepsContext = () => useContext(StepsContext)

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Tone from "tone"
 
 //Modes to hold "mode selector"
-import { StepsProvider } from './ctx/stepContext';
+import { StepsContext, StepsProvider } from './ctx/stepContext';
 import Grid from './components/grid';
 import Modes from './components/modes';
 import SlidersPage from './pages/sliders';
@@ -13,15 +13,19 @@ import SavePage from './pages/save';
 import TransportControl from './components/transport';
 
 
-function App() {
 
+function App() {
+console.log(StepsProvider)
+console.log(StepsContext)
   const [view, setView] = useState('steps')
   const [playHead, setPlayHead] = useState('stop')
-  
+
 
   const renderView = () => {
     if (view === 'steps') {
-      return <Grid />
+      return (
+      <Grid />
+      )
     }
     else if (view === 'sliders') {
       return <SlidersPage />
@@ -40,19 +44,23 @@ function App() {
 
 
   return (
-    <>
+    <StepsProvider>
+
       <Modes
         className='modes'
         view={view}
         setView={setView} />
-      {renderView()}
+
+        {renderView()}
+        
+      
 
       <TransportControl
-      className='transportControl'
-      playHead={playHead}
-      setPlayHead={setPlayHead}/>
+        className='transportControl'
+        playHead={playHead}
+        setPlayHead={setPlayHead} />
 
-    </>
+    </StepsProvider>
   );
 }
 

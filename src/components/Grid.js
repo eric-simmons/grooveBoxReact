@@ -4,21 +4,20 @@ import Button from "./button";
 
 const Grid = () => {
     const { steps, dispatch } = useStepsContext()
-    console.log(steps)
+    
     return (
         <>
             <div className='grid'>
-                {steps.map((step, i) => (
+                {steps.steps.map((step, i) => (
                     <Button
-                        key={(steps[i].stepId)}
+                        key={step + i}
                         onClick={() => {
+                            console.log(step.stepId)
                             dispatch({
                                 type: TOGGLE_STEP,
                                 payload: step.stepId
                             })
                         }}
-                        active={false}
-                        style={{ backgroundColor: step.currentStep ? 'red' : '' }}
                     />
                 ))}
             </div>

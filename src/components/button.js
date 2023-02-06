@@ -1,9 +1,9 @@
-const Button = ({ children, className, active = false, ...restOfProps }) => {
+const Button = ({ className }) => {
     return (
         <button
             className={`btn ${className}`}
-            {...restOfProps}>
-            {children}
+            >
+            
         </button>
     )
 }
