@@ -22,10 +22,11 @@ const defaultState = {
 }
 export const StepsContext = createContext(defaultState)
 export const StepsProvider = ({ children }) => {
-    const [steps, dispatch] = useReducer(reducer, defaultState)
+    const [state, dispatch] = useReducer(reducer, defaultState)
+    console.log(state)
     return (
         <StepsContext.Provider
-            value={{ steps, dispatch }}>
+            value={{ state, dispatch }}>
             {children}
         </StepsContext.Provider>
     )

@@ -1,20 +1,26 @@
 import { TOGGLE_STEP, SEQUENCE_PITCH } from "./actions"
 
-const reducer = (steps, action) => {
+const reducer = (state, action) => {
     console.log(action.payload)
 
     switch (action.type) {
         case TOGGLE_STEP:
-
             const stepId = action.payload
-            return ([
-                ...steps,
+            const updatedSteps = state.steps.map(step => {
+                return step.stepId === stepId ? {
+                    ...step,
+                    activeStep: !step.activeStep
+                } : step
+
+            })
+
+            return (
                 {
-                    activeStep: steps.stepId === stepId ? !steps.activeStep : steps.activeStep,
-                    className: steps.stepId === stepId ? 'btn-active' : 'btn'
-                }
-            ])
-            default: return steps
+                    ...state,
+                    steps: updatedSteps
+                })
+        default:
+            return state
     }
 }
 export default reducer
