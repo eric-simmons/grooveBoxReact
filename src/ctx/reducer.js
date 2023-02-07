@@ -1,14 +1,12 @@
 import { TOGGLE_STEP, SEQUENCE_PITCH } from "./actions"
-import classNames from "classnames"
-let isPressed = false
-let isActive = false
+// import classNames from "classnames"
+// let isActive 
 
-let btnClass = classNames({
-    'btn': true,
-    'btn-pressed': isPressed,
-    'btn-active': isActive
-}
-)
+// let btnClass = classNames({
+//     'btn': true,
+//     'btn-active': isActive
+// }
+// )
 
 
 
@@ -21,14 +19,16 @@ const reducer = (state, action) => {
                     ? {
                         ...step,
                         activeStep: !step.activeStep,
-                        className: btnClass,
+                        className: step.className === 'btn' ? 'btn-active' : 'btn',
                     } : step
             })
+            console.log(updatedSteps)
             return (
                 {
                     ...state,
                     steps: updatedSteps
                 })
+
         case SEQUENCE_PITCH:
             {
                 const sliderId = action.payload.id
@@ -42,7 +42,6 @@ const reducer = (state, action) => {
                             }
                         } : step
                 })
-                console.log(updatedSteps)
                 return (
                     {
                         ...state,
