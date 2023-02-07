@@ -10,8 +10,9 @@ const Grid = () => {
                 {state.steps.map((step, i) => (
                     <Button
                         key={step + i}
+                        className={step.className}
                         onClick={() => {
-                            console.log('clicked')
+                            console.log(step)
                             dispatch({
                                 type: TOGGLE_STEP,
                                 payload: step.stepId

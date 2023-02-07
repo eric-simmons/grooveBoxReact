@@ -19,7 +19,6 @@ const Sequencer = () => {
                                     id: slider.stepId,
                                     value: event.target.value
                                 }
-                                    
                             })
                         }}
                     />
