@@ -52,9 +52,15 @@
 }
 
 .btn-active{
-  background-color: #140101;
-  box-shadow: 0 5px #2a0f7b;
-  transform: translateY(4px);
+  display: grid;
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #9470ff;
+  border: none;
+  border-radius:3px;
+  box-shadow: 0 9px #2a0f7b;
 }
 
 .globalSliders {

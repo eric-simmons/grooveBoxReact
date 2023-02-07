@@ -1,19 +1,35 @@
 
 import Button from "./button"
+import { useStepsContext } from "../ctx/stepContext"
+import { START_PLAYHEAD } from "../ctx/actions"
+import {Transport, Time, } from 'tone'
 
-const TransportControl = ({ playHead, setPlayHead }) => {
+
+
+const TransportControl = () => {
+    const { state, dispatch } = useStepsContext()
     return (
         <div className="transportControl">
             <Button
-                onClick={() => setPlayHead('start')}>
+                onClick={() => {
+                    Transport.start()
+                    console.log(Time)
+                    dispatch({
+                        type: START_PLAYHEAD,
+                        payload: state
+                    })
+                }}
+            >
                 Start
             </Button>
-            <Button
-                onClick={() => setPlayHead('pause')}>
-                Pause
+
+
+
+
+
+            <Button>Pause
             </Button>
-            <Button
-                onClick={() => setPlayHead('stop')}>
+            <Button>
                 Stop
             </Button>
         </div>

@@ -1,13 +1,10 @@
-import { TOGGLE_STEP, SEQUENCE_PITCH } from "./actions"
-// import classNames from "classnames"
-// let isActive 
+import * as Tone from "tone";
 
-// let btnClass = classNames({
-//     'btn': true,
-//     'btn-active': isActive
-// }
-// )
-
+import {
+    TOGGLE_STEP,
+    SEQUENCE_PITCH,
+    START_PLAYHEAD
+} from "./actions"
 
 
 const reducer = (state, action) => {
@@ -47,6 +44,29 @@ const reducer = (state, action) => {
                         ...state,
                         steps: updatedSteps
                     })
+            }
+        case START_PLAYHEAD:
+            {
+                //why doesnt it work without this????
+                const osc = new Tone.Oscillator()
+                Tone.Transport.scheduleRepeat((time) => {
+                    console.log(time)
+                    Tone.Draw.schedule(() => {
+                        let playHead = Math.floor(((Tone.Transport.progress) * 4) * Tone.Transport.loopEnd)
+                        let updatedSteps = state.steps.map(step => {
+                            return {
+                                ...step,
+                                currentStep: step.stepId === playHead ? !step.currentStep : step.currentStep
+                            }
+                        })
+                    }, time)
+
+                }, "8n")
+                // transport must be started before it starts invoking events
+     
+                Tone.Transport.start()
+                // Tone.Transport.start()
+
             }
 
 
