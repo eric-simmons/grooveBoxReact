@@ -1,9 +1,10 @@
-const Slider = (props) => {
+const Slider = ({className, ...restOfProps}) => {
     return (
-        <input className="sequencer"
-            value="30"
+        <input
+            className="slider"
             type="range"
-            orient="vertical" />
+            {...restOfProps}
+        />
     )
 }
 

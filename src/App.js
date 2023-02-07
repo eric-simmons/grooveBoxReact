@@ -5,6 +5,7 @@ import Tone from "tone"
 //Modes to hold "mode selector"
 import { StepsContext, StepsProvider } from './ctx/stepContext';
 import Grid from './components/grid';
+import Sequencer from './components/sequencer';
 import Modes from './components/modes';
 import SlidersPage from './pages/sliders';
 import StepsPage from './pages/steps';
@@ -15,20 +16,16 @@ import TransportControl from './components/transport';
 
 
 function App() {
-console.log(StepsProvider)
-console.log(StepsContext)
   const [view, setView] = useState('steps')
   const [playHead, setPlayHead] = useState('stop')
 
 
   const renderView = () => {
     if (view === 'steps') {
-      return (
-      <Grid />
-      )
+      return (<Grid />)
     }
     else if (view === 'sliders') {
-      return <SlidersPage />
+      return <Sequencer />
     }
     else if (view === 'perform') {
       return <PerformPage />

@@ -4,7 +4,6 @@ import Button from "./button";
 
 const Grid = () => {
     const { state, dispatch } = useStepsContext()
-    
     return (
         <>
             <div className='grid'>
@@ -12,6 +11,7 @@ const Grid = () => {
                     <Button
                         key={step + i}
                         onClick={() => {
+                            console.log('clicked')
                             dispatch({
                                 type: TOGGLE_STEP,
                                 payload: step.stepId

@@ -1,12 +1,21 @@
 import { createContext, useContext, useReducer } from 'react'
 import reducer from './reducer'
+import classNames from "classnames"
+let isPressed = false
+let isActive = false
+let btnClass = classNames('btn' ,{
+    'btn-pressed': isPressed,
+    'btn-active': isActive
+})
+
+
 
 const defaultSteps = [...Array(16).fill(0).map((_, i) => {
     return {
         stepId: i,
         activeStep: false,
         currentStep: false,
-        className: 'btn',
+        className: btnClass,
         settings: {
             velocity: 0,
             pitch: 30,
@@ -23,7 +32,6 @@ const defaultState = {
 export const StepsContext = createContext(defaultState)
 export const StepsProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, defaultState)
-    console.log(state)
     return (
         <StepsContext.Provider
             value={{ state, dispatch }}>

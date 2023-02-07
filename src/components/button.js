@@ -1,10 +1,11 @@
+
 const Button = ({ className, ...restOfProps }) => {
+
     return (
         <button
-            className={`btn ${className}`}
+            className="btn"
             {...restOfProps}
             >
-            
         </button>
     )
 }
