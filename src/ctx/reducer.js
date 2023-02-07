@@ -46,13 +46,16 @@ const reducer = (state, action) => {
                     })
             }
         case START_PLAYHEAD:
-            {
+            {//should this not be used in context it updates all steps EVERY step??
                 //why doesnt it work without this????
                 const osc = new Tone.Oscillator()
+                Tone.Transport.loop = true
+                Tone.Transport.loopEnd = ("2:0:0")
                 Tone.Transport.scheduleRepeat((time) => {
-                    console.log(time)
+                    
                     Tone.Draw.schedule(() => {
                         let playHead = Math.floor(((Tone.Transport.progress) * 4) * Tone.Transport.loopEnd)
+                        console.log(playHead)
                         let updatedSteps = state.steps.map(step => {
                             return {
                                 ...step,
@@ -60,7 +63,6 @@ const reducer = (state, action) => {
                             }
                         })
                     }, time)
-
                 }, "8n")
                 // transport must be started before it starts invoking events
      
