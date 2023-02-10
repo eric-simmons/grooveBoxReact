@@ -1,7 +1,7 @@
 
 import Button from "./button"
 import { useStepsContext } from "../ctx/stepContext"
-import { START_PLAYHEAD } from "../ctx/actions"
+import { START_TRANSPORT } from "../ctx/actions"
 import {Transport, Time, } from 'tone'
 
 
@@ -13,20 +13,14 @@ const TransportControl = () => {
             <Button
                 onClick={() => {
                     Transport.start()
-                    console.log(Time)
                     dispatch({
-                        type: START_PLAYHEAD,
+                        type: START_TRANSPORT,
                         payload: state
                     })
                 }}
             >
                 Start
             </Button>
-
-
-
-
-
             <Button>Pause
             </Button>
             <Button>

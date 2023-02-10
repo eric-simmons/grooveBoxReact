@@ -32,6 +32,7 @@ const defaultState = {
 export const StepsContext = createContext(defaultState)
 export const StepsProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, defaultState)
+  
     return (
         <StepsContext.Provider
             value={{ state, dispatch }}>

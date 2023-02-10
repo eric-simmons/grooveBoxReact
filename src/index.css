@@ -39,6 +39,17 @@
   background-color: rgb(98, 24, 24);
   
 }
+.btn-playhead{
+  display: grid;
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #ff00ea;
+  border: none;
+  border-radius:3px;
+  box-shadow: 0 9px #2a0f7b;
+}
 .btn{
   display: grid;
   margin: 20px;
@@ -62,6 +73,8 @@
   border-radius:3px;
   box-shadow: 0 9px #2a0f7b;
 }
+
+
 
 .globalSliders {
   /* margin: 50px 10px 0; */

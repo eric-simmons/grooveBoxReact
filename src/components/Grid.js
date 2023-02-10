@@ -12,10 +12,9 @@ const Grid = () => {
                         key={step + i}
                         className={step.className}
                         onClick={() => {
-                            console.log(step)
                             dispatch({
                                 type: TOGGLE_STEP,
-                                payload: step.stepId
+                                payload: step
                             })
                         }}
                     />

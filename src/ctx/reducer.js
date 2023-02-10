@@ -1,18 +1,20 @@
 import * as Tone from "tone";
+import { MembraneSynth, StateTimeline } from "tone";
+import Kick from "../instruments/kick";
+
 
 import {
     TOGGLE_STEP,
-    SEQUENCE_PITCH,
-    START_PLAYHEAD
+    SEQUENCE_CHANGE,
+    START_TRANSPORT,
 } from "./actions"
 
 
 const reducer = (state, action) => {
     switch (action.type) {
         case TOGGLE_STEP:
-            const stepId = action.payload
             const updatedSteps = state.steps.map(step => {
-                return step.stepId === stepId
+                return step.stepId === action.payload.stepId
                     ? {
                         ...step,
                         activeStep: !step.activeStep,
@@ -26,16 +28,16 @@ const reducer = (state, action) => {
                     steps: updatedSteps
                 })
 
-        case SEQUENCE_PITCH:
+        //CHANGE_SEQUENCE
+        case SEQUENCE_CHANGE:
             {
-                const sliderId = action.payload.id
-                const sliderValue = action.payload.value
                 const updatedSteps = state.steps.map(step => {
-                    return step.stepId === sliderId
+                    return step.stepId === action.payload.id
                         ? {
                             ...step,
                             settings: {
-                                pitch: sliderValue
+                                ...step.settings,
+                                [action.payload.parameterName]: action.payload.value
                             }
                         } : step
                 })
@@ -43,35 +45,67 @@ const reducer = (state, action) => {
                     {
                         ...state,
                         steps: updatedSteps
-                    })
+                    }
+                )
             }
-        case START_PLAYHEAD:
+        case START_TRANSPORT:
             {//should this not be used in context it updates all steps EVERY step??
-                //why doesnt it work without this????
+                //why doesnt it work without osc????
+                // let oneKick = {
+                //     time: '8n', 
+                //     note: "C3",
+                //     velocity: (Math.floor(Math.random() * 2)) * (Math.random() * 1)
+                // }
+                // let kicks = []
+                // for(let i = 0; i<16; i++){
+                //     kicks.push(oneKick)
+                // }
+
+
+
+
+
+
                 const osc = new Tone.Oscillator()
                 Tone.Transport.loop = true
                 Tone.Transport.loopEnd = ("2:0:0")
+
                 Tone.Transport.scheduleRepeat((time) => {
-                    
-                    Tone.Draw.schedule(() => {
-                        let playHead = Math.floor(((Tone.Transport.progress) * 4) * Tone.Transport.loopEnd)
-                        console.log(playHead)
-                        let updatedSteps = state.steps.map(step => {
-                            return {
+                    let playHead = Math.floor(((Tone.Transport.progress) * 4) * Tone.Transport.loopEnd)
+                    let updatedSteps = state.steps.map(step => {
+                        return step.stepId === playHead
+                            ? {
                                 ...step,
-                                currentStep: step.stepId === playHead ? !step.currentStep : step.currentStep
+                                currentStep: !step.currentStep,
+                                className: "btn-playhead"
+                            } : step
+                    })
+                    console.log(updatedSteps)
+                    Tone.Draw.schedule(() => {
+
+
+                        return (
+                            {
+                                ...state,
+                                steps: updatedSteps
                             }
-                        })
+                        )
+
                     }, time)
                 }, "8n")
+
+
                 // transport must be started before it starts invoking events
-     
+                const kick = new MembraneSynth().toDestination();
+                const seq = new Tone.Sequence((time, value) => {
+                    kick.triggerAttackRelease(value.note, '8n', time, value.velocity);
+                    // subdivisions are given as subarrays
+                }, []).start(0);
+
                 Tone.Transport.start()
                 // Tone.Transport.start()
 
             }
-
-
 
         default:
             return state

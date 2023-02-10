@@ -1,12 +1,33 @@
-import { useState, useEffect } from 'react'
-import Modes from '../components/modes'
-import Button from '../components/button'
-import { Oscillator, Sequence, Transport, Draw, time, Start, } from 'tone'
 
-    Transport.loop = true
-    Transport.loopEnd = ("2:0:0")
-        Transport.start();
+// import { MembraneSynth, Destination, Filter  } from 'tone'
 
-  
 
-export default StepsPage
+// class Kick {
+//     constructor(...pattern){
+//         this.pattern = pattern
+//     }
+// }
+
+// const kickDrum = new MembraneSynth({
+//     volume: 6,
+// }).toDestination();
+// const lowPass = new Filter({
+//     frequency: 8000,
+// }).toDestination();
+
+// // const kickSequence = new Tone.Sequence((time) => {
+// //     let currentStep = Math.floor(kickSequence.progress * kickSequence.loopEnd)
+// //     if (stepBtns[currentStep].matches('.activeStep')) {
+// //         kick.triggerAttackRelease(notes[currentStep], noteLength[currentStep], time)
+// //     }
+// // }, findMatches(scale, notes)).start(0)
+
+// export const startKickPart = () => {
+//     const kickPart = new Tone.Part((time, value) => {
+//         kickDrum.triggerAttackRelease(value.note, '8n', time, value.velocity)
+//     }, kicks).start(0);
+//     kickPart.loop = true
+// }
+
+
+// export default Kick
