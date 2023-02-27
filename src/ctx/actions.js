@@ -1,3 +1,4 @@
 export const TOGGLE_STEP = 'TOGGLE_STEP'
 export const SEQUENCE_CHANGE = 'SEQUENCE_CHANGE'
 export const START_TRANSPORT = 'START_TRANSPORT'
+export const PLAYHEAD = 'PLAYHEAD'

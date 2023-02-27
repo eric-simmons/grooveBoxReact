@@ -9,12 +9,10 @@ let btnClass = classNames('btn' ,{
 })
 
 
-
 const defaultSteps = [...Array(16).fill(0).map((_, i) => {
     return {
         stepId: i,
         activeStep: false,
-        currentStep: false,
         className: btnClass,
         settings: {
             velocity: 0,

@@ -4,8 +4,8 @@ import { SEQUENCE_CHANGE } from "../ctx/actions";
 import { useState } from "react";
 
 const ParameterSlider = ({ stepId, dispatch }) => {
-
     const [parameterName, setParameterName] = useState('pitch')
+
     return (
         <>
             <select value={parameterName}
@@ -13,11 +13,11 @@ const ParameterSlider = ({ stepId, dispatch }) => {
                     setParameterName(e.target.value)
                 }}>
                 <option value='pitch'>Pitch</option>
+                <option value='velocity'>Velocity</option>
                 <option value='attack'>Attack</option>
                 <option value='decay'>Decay</option>
             </select>
             <Slider
-
                 onChange={(event) => {
                     dispatch({
                         type: SEQUENCE_CHANGE,
@@ -37,6 +37,7 @@ const Sequencer = () => {
     return (
         <>
             <div className='sequencerDiv'>
+
                 {state.steps.map((step, i) => (
                     <ParameterSlider
                         key={step.stepId}
