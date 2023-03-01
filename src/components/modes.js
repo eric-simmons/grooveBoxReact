@@ -1,5 +1,5 @@
 //container holds mode selector buttons
-import Button from "./button"
+import Button from "./Button"
 
 const Modes = ({ view, setView }) => {
     return (

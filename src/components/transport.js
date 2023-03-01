@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import Button from "./button"
+import Button from "./Button"
 import { useStepsContext } from "../ctx/stepContext"
 import { START_TRANSPORT } from "../ctx/actions"
 

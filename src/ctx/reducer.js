@@ -1,8 +1,7 @@
 import * as Tone from "tone";
 import { MembraneSynth, StateTimeline } from "tone";
 import Kick from "../instruments/kick";
-
-
+import classNames from "classnames"
 import {
     TOGGLE_STEP,
     SEQUENCE_CHANGE,
@@ -10,20 +9,25 @@ import {
     PLAYHEAD
 } from "./actions"
 import { StepsProvider } from "./stepContext";
-
-
 const reducer = (state, action) => {
     switch (action.type) {
         case TOGGLE_STEP:
             const updatedSteps = state.steps.map(step => {
+                //if step matches payload set btnActive true for that step
+                console.log(step.className)
                 return step.stepId === action.payload.stepId
                     ? {
                         ...step,
                         activeStep: !step.activeStep,
-                        className: step.className === 'btn' ? 'btn-active' : 'btn',
+                        className: classNames({
+                            btn: true,
+                            btnActive: !step.activeStep, 
+                            btnPlayhead: false
+                        })
                     } : step
             })
 
+            console.log(updatedSteps)
             return (
                 {
                     ...state,
@@ -31,20 +35,27 @@ const reducer = (state, action) => {
                 })
         case PLAYHEAD: {
             const updatedSteps = state.steps.map(step => {
-                if (step.stepId === action.payload) {
-                    console.log(step)
-                }
                 return step.stepId === action.payload
                     ? {
-                        ...step, 
-                        className : "btn-playhead"
+                        ...step,
+                        playhead: !step.playhead,
+                        className: classNames({
+                            btn: false,
+                            btnActive: false, 
+                            btnPlayhead: !step.playhead
+                        })
                     }
-                    :{
+                    : {
                         ...step, 
-                        className  : "btn"
+                        playhead: false, 
+                        className: classNames({
+                            btn: true, 
+                            btnActive: step.activeStep, 
+                            btnPlayhead : false
+                        })
                     }
             })
-
+            console.log(updatedSteps)
             return (
                 {
                     ...state,
@@ -52,23 +63,6 @@ const reducer = (state, action) => {
                 })
 
         }
-
-
-
-        //     const updatedSteps = state.steps.map(step => {
-        //         return step.stepId = action.payload
-        //             ? {
-        //                 ...step,
-        //                 className: "btn-playhead"
-        //             }
-        //             : step
-        //     })
-        //     return (
-        //         {
-        //             ...state,
-        //             steps: updatedSteps
-        //         })
-        // }
         //CHANGE_SEQUENCE
         case SEQUENCE_CHANGE:
             {

@@ -1,19 +1,21 @@
+import classNames from 'classnames'
 import { createContext, useContext, useReducer } from 'react'
 import reducer from './reducer'
-import classNames from "classnames"
-let isPressed = false
-let isActive = false
-let btnClass = classNames('btn' ,{
-    'btn-pressed': isPressed,
-    'btn-active': isActive
-})
+
+
 
 
 const defaultSteps = [...Array(16).fill(0).map((_, i) => {
+    
     return {
         stepId: i,
         activeStep: false,
-        className: btnClass,
+        playhead: false,
+        className: classNames({
+            stepBtn: true,
+            btnActive: false, 
+            btnPlayhead: false
+        }),
         settings: {
             velocity: 0,
             pitch: 30,

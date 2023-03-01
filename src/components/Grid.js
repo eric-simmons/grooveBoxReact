@@ -2,17 +2,17 @@ import { PLAYHEAD, TOGGLE_STEP } from "../ctx/actions";
 import { useEffect, useState } from "react";
 import { useStepsContext } from "../ctx/stepContext";
 import * as Tone from 'tone'
-import Button from "./button";
+import StepButton from "./StepButton";
 
 const Grid = () => {
     const { state, dispatch } = useStepsContext()
     const [playhead, setPlayhead] = useState(0)
-useEffect(() => {
-    dispatch({
-                type: PLAYHEAD,
-                payload: playhead
-            })
-}, [playhead, dispatch])
+    useEffect(() => {
+        dispatch({
+            type: PLAYHEAD,
+            payload: playhead
+        })
+    }, [playhead, dispatch])
 
 
     Tone.Transport.scheduleRepeat((time) => {
@@ -21,16 +21,16 @@ useEffect(() => {
             setPlayhead(playhead)
         }, time)
     }, "8n")
-
     return (
         <>
             <div className='grid'>
                 {state.steps.map((step, i) => (
-                    <Button
+                    <StepButton
                         key={step + i}
                         className={step.className}
-                        onClick={() => {
-                            dispatch({
+                        onClick={(e) => {
+                            // handleToggle(e);
+                             dispatch({
                                 type: TOGGLE_STEP,
                                 payload: step
                             })

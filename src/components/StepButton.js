@@ -1,6 +1,5 @@
 
-const Button = ({ className, ...restOfProps }) => {
-
+const StepButton = ({ className, ...restOfProps }) => {
     return (
         <button
             className={className}
@@ -11,4 +10,4 @@ const Button = ({ className, ...restOfProps }) => {
     )
 }
 
-export default Button
+export default StepButton

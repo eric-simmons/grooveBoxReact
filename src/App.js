@@ -4,7 +4,7 @@ import Tone from "tone"
 
 //Modes to hold "mode selector"
 import { StepsContext, StepsProvider } from './ctx/stepContext';
-import Grid from './components/grid';
+import Grid from './components/Grid';
 import Sequencer from './components/sequencer';
 import Modes from './components/modes';
 import SlidersPage from './pages/sliders';
